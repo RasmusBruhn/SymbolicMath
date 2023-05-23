@@ -1,14 +1,25 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
+pub mod constant;
+pub mod operator;
+
+pub enum Expression {
+//    Variable(Variable),
+    Constant(constant::Constant),
+//    Operator(Operator)
 }
+
+//pub enum Variable {
+//    Integer,
+//    Fraction,
+//    Real,
+//    Imaginary,
+//    Vector,
+//    Matrix,
+//    Tensor,
+//    Set
+//}
+
 
 #[cfg(test)]
 mod tests {
-    use super::*;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
 }
