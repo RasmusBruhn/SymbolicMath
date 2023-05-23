@@ -1,9 +1,9 @@
-pub mod constant;
+pub mod value;
 pub mod operator;
 
 pub enum Expression {
 //    Variable(Variable),
-    Constant(constant::Constant),
+    Value(value::Value),
 //    Operator(Operator)
 }
 
