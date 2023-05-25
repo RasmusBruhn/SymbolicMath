@@ -7,18 +7,6 @@ pub enum Expression {
 //    Operator(Operator)
 }
 
-//pub enum Variable {
-//    Integer,
-//    Fraction,
-//    Real,
-//    Imaginary,
-//    Vector,
-//    Matrix,
-//    Tensor,
-//    Set
-//}
-
-
 #[cfg(test)]
 mod tests {
 
