@@ -29,7 +29,7 @@ impl Database {
         match self.dict.get(name) {
             Some(value) => *value,
             None => {
-                self.list.push(Variable {});
+                self.list.push(Variable::new(String::from(name)));
                 self.dict.insert(String::from(name), self.list.len() - 1);
                 self.list.len() - 1
             }
@@ -42,6 +42,17 @@ impl Database {
 }
 
 pub struct Variable {
+    name: String,
+}
+
+impl Variable {
+    pub fn new(name: String) -> Self {
+        Self {name: name}
+    }
+
+    pub fn get_name(&self) -> &str {
+        &self.name
+    }
 }
 
 #[cfg(test)]
@@ -58,7 +69,7 @@ mod tests {
             assert_eq!(value.list.len(), 0);
 
             value.dict.insert(String::from("a"), 1);
-            value.list.push(Variable {});
+            value.list.push(Variable::new(String::from("x")));
 
             let value = Database::new();
             assert_eq!(value.dict.len(), 0);
@@ -101,6 +112,22 @@ mod tests {
             if let Some(_) = variable {
                 panic!("Variable must not be Some")
             }
+        }
+    }
+
+    mod variable {
+        use super::*;
+
+        #[test]
+        fn new() {
+            let value = Variable::new(String::from("x"));
+            assert_eq!(value.name, "x");
+        }
+
+        #[test]
+        fn get_name() {
+            let value = Variable::new(String::from("x"));
+            assert_eq!(value.get_name(), "x");
         }
     }
 }
