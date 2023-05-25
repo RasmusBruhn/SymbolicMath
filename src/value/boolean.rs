@@ -1,3 +1,5 @@
+use super::Database;
+
 pub enum Boolean {
     Constant(Constant),
     //Variable
@@ -22,7 +24,13 @@ impl Constant {
 }
 
 pub struct Variable {
-    
+    id: usize,
+}
+
+impl Variable {
+    pub fn new(name: &str, database: &mut Database) -> Self {
+        Self {id: database.get_key(name)}
+    }
 }
 
 #[cfg(test)]
@@ -57,6 +65,28 @@ mod tests {
 
             let value = Constant::new(false);
             assert_eq!(value.to_string(), "0");
+        }
+    }
+
+    mod variable {
+        use super::*;
+
+        #[test]
+        fn new() {
+            let mut database1 = Database::new();
+            let mut database2 = Database::new();
+
+            let x1 = Variable::new("x", &mut database1);
+            assert_eq!(x1.id, 0);
+
+            let y1 = Variable::new("y", &mut database1);
+            assert_eq!(y1.id, 1);
+
+            let x2 = Variable::new("x", &mut database1);
+            assert_eq!(x2.id, 0);
+
+            let y2 = Variable::new("y", &mut database2);
+            assert_eq!(y2.id, 0);
         }
     }
 }
