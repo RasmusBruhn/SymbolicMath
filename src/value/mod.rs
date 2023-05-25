@@ -1,7 +1,7 @@
 //pub mod real;
 pub mod boolean;
 
-pub enum Value {
+pub enum Type {
     Boolean(boolean::Boolean),
     //Integer,
     //Fraction,
